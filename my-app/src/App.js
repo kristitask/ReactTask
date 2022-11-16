@@ -26,33 +26,37 @@ function Form() {
   const [formErrors,setFormErrors] = useState({});
   const [selected, setSelected] = useState();
 
-  const handleOption = (field,value1) =>{
+  const handleOption = (field,value) =>{
   switch(field){ 
     case 'options':
-      setSelected (value1)
+      setSelected (value)
       break
       default:
         break
-        
   }
   
   };
+  // cfare ndodh
   const handleChange = (e)=>{
-  const {name_1,value_1} = e.target;
-  setFormValues({...formValues,[name_1]:value_1});
-  };
+  const {name,value} = e.target;
+  //[object HTMLObjectElement]-- objekti me key-name dhe vlere-value
+  setFormValues({...formValues,[name]:value});
+  console.log(name);//Vendosim vlerat e formes duke marr te gjitha vlerat e
+};//fillestare "..formValues" dhe per cdo vlere qe marrim e shtoj te objekti [name]:value(name si key dhe value si vlera e objekteve) 
+ //cdo gje qe shkruajme ne forme,do te shtojme vlerat qe kemi plotesuar ne formValues
+
   const handleSubmit = (e) =>{
   e.preventDefault();
   setFormErrors(validate(formValues));
 };
   
 
-  const validate =(values1)=>{ 
+  const validate =(values1)=>{ //duhet qe te validojme formen
   const errors = {};
   const emailformat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const allowvalue =/^[a-zA-Z\s]*$/;
 
-     if(!values1.firstName){
+     if(!values1.firstName){//kontrollojme nese ka apo jo vlere field-i nese jo vjen nje sms qe duhet plotesuar
       errors.firstName ="**Firstname is required!";
      }
      else if (!allowvalue.test(values1.firstName)){
@@ -96,9 +100,9 @@ function Form() {
           class="form-control"
           type="text"
           name="lastName"
-          value={formValues.lastName}
-          onChange ={handleChange}
-          
+          value={formValues.lastName}//formValue merr cdo vlere te fieldeve "formValues.lastName"tashme jane te lidhura me useState
+          onChange ={handleChange}//duhet qe cfaredo qe shkuajme ne fielde duhet te update-ojme vlerat e "initianalValues"
+          //prandaj krijojme funksionin handleChange
           />
         </label>
         <p class="titull2">{formErrors.lastName}</p>
@@ -109,7 +113,7 @@ function Form() {
           class="form-control"
           type="text"
           name="email"
-          value={formValues.email}
+          value={formValues.email}//formValue merr cdo vlere te fieldeve "formValues.email"
           onChange ={handleChange}
           
         />
@@ -128,7 +132,7 @@ function Form() {
       </label><br></br><br></br>
       <button  class="btn btn-info" type="submit"><b><i>Submit</i></b></button>
     </form>
-    </div>
+      </div>
     </div>
 
     <div class="te_dhena" >

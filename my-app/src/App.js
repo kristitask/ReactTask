@@ -19,10 +19,9 @@ function Form() {
     { label: "Gardening", value: "Gardening" },
     { label: "Hiking", value: "Hiking" },
   ];
-  // cfare ndodh
+ 
   const initionalValues =  {firstName: "",lastName: "",email:""};
-  //menaxhojme gjendjen e fieldeve duke perdorur setState()
-  const [formValues,setFormValues] = useState(initionalValues);//useState merr  si parameter "initionalValues".Elementete useState jane:gjendja e meparshme e fildeve"formValues" dhe funksionin "setFormValues"qe updaton gjendjet
+  const [formValues,setFormValues] = useState(initionalValues);
   const [formErrors,setFormErrors] = useState({});
   const [selected, setSelected] = useState();
 
@@ -34,16 +33,15 @@ function Form() {
       default:
         break
   }
+};
   
-  };
-  // cfare ndodh
   const handleChange = (e)=>{
   const {name,value} = e.target;
-  //[object HTMLObjectElement]-- objekti me key-name dhe vlere-value
+  
   setFormValues({...formValues,[name]:value});
-  console.log(name);//Vendosim vlerat e formes duke marr te gjitha vlerat e
-};//fillestare "..formValues" dhe per cdo vlere qe marrim e shtoj te objekti [name]:value(name si key dhe value si vlera e objekteve) 
- //cdo gje qe shkruajme ne forme,do te shtojme vlerat qe kemi plotesuar ne formValues
+  console.log(name);
+};
+ 
 
   const handleSubmit = (e) =>{
   e.preventDefault();
@@ -51,12 +49,12 @@ function Form() {
 };
   
 
-  const validate =(values1)=>{ //duhet qe te validojme formen
+  const validate =(values1)=>{ 
   const errors = {};
   const emailformat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const allowvalue =/^[a-zA-Z\s]*$/;
 
-     if(!values1.firstName){//kontrollojme nese ka apo jo vlere field-i nese jo vjen nje sms qe duhet plotesuar
+     if(!values1.firstName){
       errors.firstName ="**Firstname is required!";
      }
      else if (!allowvalue.test(values1.firstName)){
@@ -85,65 +83,65 @@ function Form() {
         <label className='name'>
           <b>First name: </b><b><big><i class="bi bi-pencil-fill"></i></big></b>
            <input
-           class="form-control"
-           type="text"
-           name="firstName"
-           value={formValues.firstName}
-           onChange ={handleChange} 
-          />
+            class="form-control"
+            type="text"
+            name="firstName"
+            value={formValues.firstName}
+            onChange ={handleChange} 
+           />
         </label>
         <p class="titull2">{formErrors.firstName}</p>
       
         <label className='name'>
-         <b>Last name: </b><b><big><i class="bi bi-pencil-fill"></i></big></b>
+        <b>Last name: </b><b><big><i class="bi bi-pencil-fill"></i></big></b>
         <input
           class="form-control"
           type="text"
           name="lastName"
-          value={formValues.lastName}//formValue merr cdo vlere te fieldeve "formValues.lastName"tashme jane te lidhura me useState
-          onChange ={handleChange}//duhet qe cfaredo qe shkuajme ne fielde duhet te update-ojme vlerat e "initianalValues"
-          //prandaj krijojme funksionin handleChange
-          />
+          value={formValues.lastName}
+          onChange ={handleChange}
+         />
         </label>
         <p class="titull2">{formErrors.lastName}</p>
 
-      <label className='name'>
+        <label className='name'>
         <b>E-mail: </b><b><big><i class="bi bi-pencil-fill"></i></big></b>
         <input
-          class="form-control"
-          type="text"
-          name="email"
-          value={formValues.email}//formValue merr cdo vlere te fieldeve "formValues.email"
-          onChange ={handleChange}
-          
+         class="form-control"
+         type="text"
+         name="email"
+         value={formValues.email}
+         onChange ={handleChange}
         />
-      </label>
-      <p class="titull2">{formErrors.email}</p>
+        </label>
+        <p class="titull2">{formErrors.email}</p>
       
-      <label className='name'>
-      <big><b><i>Select hobies!</i></b></big><b><big><i class="bi bi-list"></i></big></b>
+        <label className='name'>
+        <big><b><i>Select hobies!</i></b></big><b><big><i class="bi bi-list"></i></big></b>
         <Creatable
-        isClearable
-        isMulti
-        options={options}
-        value={selected}
-        onChange={(v)=>handleOption('options',v)}
-/>
-      </label><br></br><br></br>
-      <button  class="btn btn-info" type="submit"><b><i>Submit</i></b></button>
+         isClearable
+         isMulti
+         options={options}
+         value={selected}
+         onChange={(v)=>handleOption('options',v)}
+        />
+        </label><br></br><br></br>
+        <button  class="btn btn-info" type="submit"><b><i>Submit</i></b></button>
     </form>
-      </div>
     </div>
+  </div>
 
-    <div class="te_dhena" >
-      <p class="style"><i><b>Fields information</b></i></p><br></br>
-      <h4 class="titull3">{formValues.firstName}<br></br></h4>
-      <h4 class="titull3">{formValues.lastName}<br></br></h4>
-      <h4 class="titull3">{formValues.email}<br></br></h4>
-      <h4 class="titull3">{JSON.stringify(selected)}</h4>
-     </div>
+  <div class="te_dhena" >
+    <p class="style"><i><b>Fields information</b></i></p><br></br>
+    <h4 class="titull3">{formValues.firstName}<br></br></h4>
+    <h4 class="titull3">{formValues.lastName}<br></br></h4>
+    <h4 class="titull3">{formValues.email}<br></br></h4>
+    <h4 class="titull3">{JSON.stringify(selected)}<br></br></h4>
+    {/* <h4 class="titull3">{selected.map((item)=><p key={item.label}>{item.value}</p>)}</h4> */}
+
+  </div>
 </div>
     
-  );
+ );
 }
 export default Form;

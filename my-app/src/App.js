@@ -24,11 +24,15 @@ function Form() {
   const [formValues,setFormValues] = useState(initionalValues);
   const [formErrors,setFormErrors] = useState({});
   const [selected, setSelected] = useState();
+  const [isSelected,setIsSelected]= useState(false);
+  const [isSubmit,setIsSubmit] = useState(false)
+
 
   const handleOption = (field,value) =>{
   switch(field){ 
     case 'options':
       setSelected (value)
+      setIsSelected(true)
       break
       default:
         break
@@ -40,6 +44,7 @@ function Form() {
   
   setFormValues({...formValues,[name]:value});
   console.log(name);
+  setIsSubmit(true);
 };
  
 
@@ -120,13 +125,14 @@ function Form() {
         <big><b><i>Select hobies!</i></b></big><b><big><i class="bi bi-list"></i></big></b>
         <Creatable
          isClearable
+         isOptionSelected={isSelected}
          isMulti
          options={options}
          value={selected}
          onChange={(v)=>handleOption('options',v)}
         />
         </label><br></br><br></br>
-        <button  class="btn btn-info" type="submit"><b><i>Submit</i></b></button>
+        <button  class="btn btn-info" type="submit" isSubmit ={isSubmit}><b><i>Submit</i></b></button>
     </form>
     </div>
   </div>
@@ -136,9 +142,10 @@ function Form() {
     <h4 class="titull3">{formValues.firstName}<br></br></h4>
     <h4 class="titull3">{formValues.lastName}<br></br></h4>
     <h4 class="titull3">{formValues.email}<br></br></h4>
-    <h4 class="titull3">{JSON.stringify(selected)}<br></br></h4>
-    {/* <h4 class="titull3">{selected.map((item)=><p key={item.label}>{item.value}</p>)}</h4> */}
-
+    <h4 class="titull3">{isSelected ? selected.map((item)=><p key={item.label}>{item.value}</p>):""}</h4><br></br> 
+    {Object.keys(formErrors).length === 0 && isSubmit ?
+      (<p class="style">Submit successfully</p> ) :('')
+      }
   </div>
 </div>
     
